@@ -8,6 +8,7 @@ tokenizer_dir = cache_dir + model_name + "/tokenizer"
 
 
 def create_pipeline() -> None:
+    # TODO: Research additional aggregation-strategies (and learn wtf do they even do)
     oracle = pipeline("ner", model=model_name, aggregation_strategy="simple")
 
     # if we set aggregation_strategy to simple, we need to define a decoder for the tokenizer. Note that the last wordpiece of a group will still be emitted
@@ -35,7 +36,3 @@ def run_pipeline():
     model = AutoModelForTokenClassification.from_pretrained(model_dir)
     tokenizer = AutoTokenizer.from_pretrained(tokenizer_dir)
     return model, tokenizer
-
-
-# model = AutoModelForTokenClassification.from_pretrained(cache_dir + model_name + "/model")
-# tokenizer = AutoTokenizer.from_pretrained(cache_dir + model_name + "/tokenizer")
